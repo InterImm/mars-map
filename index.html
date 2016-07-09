@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>火星地图</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/leaflet.css"/>
+	<link rel="stylesheet" href="assets/css/leaflet.label.css"/>
+	<!-- <link rel="stylesheet" href="assets/css/font-awesome.min.css"> -->
+	<!-- <link rel="stylesheet" href="assets/css/leaflet.extra-markers.min.css"> -->
+	<!-- <script src="assets/js/leaflet.extra-markers.min.js"></script> -->
+
+  	<script src="assets/js/leaflet.js"></script>
+  	<script src="assets/js/leaflet.label.js"></script>
+	
+
+</head>
+<style>
+html, body, #map {
+width:100%; height:100%; padding:0px; margin:0px;
+}
+</style>
+<body>
+	<div id="map"></div>
+
+	<script>
+
+		/***  little hack starts here ***/
+		L.Map = L.Map.extend({
+		    openPopup: function(popup) {
+		        //        this.closePopup();  // just comment this
+		        this._popup = popup;
+
+		        return this.addLayer(popup).fire('popupopen', {
+		            popup: this._popup
+		        });
+		    }
+		}); /***  end of hack ***/
+
+
+
+		var map = L.map('map', {
+				center: [16.181, 84.624],
+				zoom: 3
+			});
+
+
+
+		var baseUrl = 'http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/';
+
+		
+		var basemapMOLAColor = new L.tileLayer(baseUrl + 'mola-color/{z}/{x}/{y}.png', {
+		  attribution: 'NASA/MOLA | 星际移民中心',
+		  tms: true,
+	    maxNativeZoom: 6,
+		}).addTo(map).setZIndex(0);
+
+
+		var baseMaps = {
+		  "Shaded Colour MOLA Elevation": basemapMOLAColor
+		};
+
+		
+
+		var marsCities = new L.LayerGroup().addTo(map);
+
+		L.marker([16.181, 84.624]).bindLabel('<b>南河城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([11.323, 93.728]).bindLabel('<b>参宿城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([7.439, 86.578]).bindLabel('<b>天狼城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([6.0, 176.0]).bindLabel('<b>楼兰城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([15.893, 199.833]).bindLabel('<b>庞贝城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([15.799, 351.137]).bindLabel('<b>奇点城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([5.496, 190.603]).bindLabel('<b>亚特兰蒂斯城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([5.029, 10.541]).bindLabel('<b>视界城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([28.850, 309.830]).bindLabel('<b>星坠城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([-38.142, 86.896]).bindLabel('<b>端点城</b>', { noHide: true }).addTo(marsCities),
+		L.marker([-39.939, 67.842]).bindLabel('<b>川陀城</b>', { noHide: true }).addTo(marsCities);
+
+
+		var marsSites = new L.LayerGroup().addTo(map);
+
+		L.marker([-4.590, 137.442]).bindLabel('<b>好奇号</b>', { noHide: true }).addTo(marsSites);
+
+
+		var overlayMaps = {
+		  "火星城市": marsCities
+		  // "火星景点": marsSites
+		}
+
+
+		L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
+	
+
+	</script>
+</body>
+</html>
