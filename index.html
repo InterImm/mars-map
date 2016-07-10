@@ -6,13 +6,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/leaflet.css"/>
 	<link rel="stylesheet" href="assets/css/leaflet.label.css"/>
-	<!-- <link rel="stylesheet" href="assets/css/font-awesome.min.css"> -->
-	<!-- <link rel="stylesheet" href="assets/css/leaflet.extra-markers.min.css"> -->
-	<!-- <script src="assets/js/leaflet.extra-markers.min.js"></script> -->
+	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/leaflet.extra-markers.min.css">
+
 
   	<script src="assets/js/leaflet.js"></script>
   	<script src="assets/js/leaflet.label.js"></script>
-	
+	<script src="assets/js/leaflet.extra-markers.min.js"></script>
+
+	<!--  ICONS -->
+      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      <link rel="apple-touch-icon" sizes="57x57" href="./favicons/apple-touch-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="./favicons/apple-touch-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="./favicons/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="./favicons/apple-touch-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="./favicons/apple-touch-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="./favicons/apple-touch-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="./favicons/apple-touch-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="./favicons/apple-touch-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon-180x180.png">
+      <link rel="icon" type="image/png" href="./favicons/favicon-192x192.png" sizes="192x192">
+      <link rel="icon" type="image/png" href="./favicons/favicon-160x160.png" sizes="160x160">
+      <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96">
+      <link rel="icon" type="image/png" href="./favicons/favicon-16x16.png" sizes="16x16">
+      <link rel="icon" type="image/png" href="./favicons/favicon-32x32.png" sizes="32x32">
+      <meta name="msapplication-TileColor" content="#da532c">
+      <meta name="msapplication-TileImage" content="./favicons/mstile-144x144.png">
+
 
 </head>
 <style>
@@ -22,6 +42,8 @@ width:100%; height:100%; padding:0px; margin:0px;
 </style>
 <body>
 	<div id="map"></div>
+
+
 
 	<script>
 
@@ -39,60 +61,180 @@ width:100%; height:100%; padding:0px; margin:0px;
 
 
 
+
+
 		var map = L.map('map', {
 				center: [16.181, 84.624],
 				zoom: 3
 			});
 
 
+	  var siteMarker = L.ExtraMarkers.icon({
+	    icon: 'fa-lightbulb-o',
+	    markerColor: 'blue',
+	    shape: 'star',
+	    prefix: 'fa'
+	  });
+
+	  var cityMarker = L.ExtraMarkers.icon({
+		icon: 'fa-street-view',
+		markerColor: 'orange',
+		shape: 'penta',
+		prefix: 'fa'
+	 });
+
+
 
 		var baseUrl = 'http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/';
 
-		
+
 		var basemapMOLAColor = new L.tileLayer(baseUrl + 'mola-color/{z}/{x}/{y}.png', {
-		  attribution: 'NASA/MOLA | 星际移民中心',
+		  attribution: '<a href="http://astrogeology.usgs.gov/search/map/Mars/GlobalSurveyor/MOLA/Mars_MGS_MOLA_ClrShade_merge_global_463m">NASA/MOLA</a> | <a href="http://interimm.org">星际移民中心</a>',
 		  tms: true,
 	    maxNativeZoom: 6,
 		}).addTo(map).setZIndex(0);
 
 
 		var baseMaps = {
-		  "Shaded Colour MOLA Elevation": basemapMOLAColor
+		  "Colour MOLA Elevation": basemapMOLAColor
 		};
 
-		
+
 
 		var marsCities = new L.LayerGroup().addTo(map);
 
-		L.marker([16.181, 84.624]).bindLabel('<b>南河城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([11.323, 93.728]).bindLabel('<b>参宿城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([7.439, 86.578]).bindLabel('<b>天狼城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([6.0, 176.0]).bindLabel('<b>楼兰城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([15.893, 199.833]).bindLabel('<b>庞贝城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([15.799, 351.137]).bindLabel('<b>奇点城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([5.496, 190.603]).bindLabel('<b>亚特兰蒂斯城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([5.029, 10.541]).bindLabel('<b>视界城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([28.850, 309.830]).bindLabel('<b>星坠城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([-38.142, 86.896]).bindLabel('<b>端点城</b>', { noHide: true }).addTo(marsCities),
-		L.marker([-39.939, 67.842]).bindLabel('<b>川陀城</b>', { noHide: true }).addTo(marsCities);
+		L.marker([16.181, 84.624],{icon: cityMarker,}).bindLabel('<b>南河城</b>', { noHide: true, direction: 'left', offset: [23,-35] }).addTo(marsCities),
+		L.marker([11.323, 93.728],{icon: cityMarker,}).bindLabel('<b>参宿城</b>', { noHide: true , offset: [23,-35] }).addTo(marsCities),
+		L.marker([7.439, 86.578],{icon: cityMarker,}).bindLabel('<b>天狼城</b>', { noHide: true, direction: 'left', offset: [23,-35]  }).addTo(marsCities),
+		L.marker([6.0, 176.0],{icon: cityMarker,}).bindLabel('<b>楼兰城</b>', { noHide: true, direction: 'left', offset: [23,-35]  }).addTo(marsCities),
+		L.marker([15.893, 199.833],{icon: cityMarker,}).bindLabel('<b>庞贝城</b>', { noHide: true, offset: [23,-35]  }).addTo(marsCities),
+		L.marker([15.799, 351.137],{icon: cityMarker,}).bindLabel('<b>奇点城</b>', { noHide: true, offset: [23,-35]  }).addTo(marsCities),
+		L.marker([5.496, 190.603],{icon: cityMarker,}).bindLabel('<b>亚特兰蒂斯城</b>', { noHide: true, offset: [23,-35]  }).addTo(marsCities),
+		L.marker([5.029, 10.541],{icon: cityMarker,}).bindLabel('<b>视界城</b>', { noHide: true, offset: [23,-35]  }).addTo(marsCities),
+		L.marker([28.850, 309.830],{icon: cityMarker,}).bindLabel('<b>星坠城</b>', { noHide: true, offset: [23,-35]  }).addTo(marsCities),
+		L.marker([-38.142, 86.896],{icon: cityMarker,}).bindLabel('<b>端点城</b>', { noHide: true, offset: [23,-35]  }).addTo(marsCities),
+		L.marker([-39.939, 67.842],{icon: cityMarker,}).bindLabel('<b>川陀城</b>', { noHide: true, direction: 'left', offset: [23,-35]  }).addTo(marsCities);
+
+		var circle = L.circle([51.508, -0.11], 1000, {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 1
+}).addTo(map);
 
 
-		// var marsSites = new L.LayerGroup().addTo(map);
+		var marsSites = new L.LayerGroup().addTo(map);
 
-		// L.marker([-4.590, 137.442]).bindLabel('<b>好奇号</b>', { noHide: true }).addTo(marsSites);
+		L.marker([-4.590, 137.442],{icon: siteMarker,}).bindLabel('<b>好奇号</b>', { noHide: true, offset: [20,-30] }).addTo(marsSites),
+		L.marker([-45.653, 46.865],{icon: siteMarker,}).bindLabel('<b>火星二号</b>', { noHide: true, offset: [20,-30] }).addTo(marsSites),
+		L.marker([-14.568, 175.473],{icon: siteMarker,}).bindLabel('<b>勇气号</b>', { noHide: true, offset: [20,-30] }).addTo(marsSites),
+		L.marker([-1.946, 354.473],{icon: siteMarker,}).bindLabel('<b>机遇号</b>', { noHide: true, offset: [20,-30] }).addTo(marsSites),
+		L.marker([22.485, 310.034],{icon: siteMarker,}).bindLabel('<b>维京一号</b>', { noHide: true, direction:'left', offset: [20,-30] }).addTo(marsSites),
+		L.marker([48.269, 134.015],{icon: siteMarker,}).bindLabel('<b>维京二号</b>', { noHide: true, offset: [20,-30] }).addTo(marsSites),
+		L.marker([-45.025, 202.488],{icon: siteMarker,}).bindLabel('<b>火星三号</b>', { noHide: true, offset: [20,-30] }).addTo(marsSites),
+		L.marker([19.136, 326.781],{icon: siteMarker,}).bindLabel('<b>火星探路者</b>', { noHide: true, direction: 'left', offset: [20,-30] }).addTo(marsSites);
+
 
 
 		var overlayMaps = {
-		  "火星城市": marsCities
-		  // "火星景点": marsSites
+		  "火星城市": marsCities,
+		  "火星景点": marsSites
 		}
 
 
 		L.control.layers(baseMaps, overlayMaps).addTo(map);
 
+		// <div class="colors">
+		// 	<div class="quartile" style="background-color:#070610"></div>
+		// 	<div class="quartile" style="background-color:#2F2C4B"></div>
+		// 	<div class="quartile" style="background-color:#514C77"></div>
+		// 	<div class="quartile" style="background-color:#4E5FA3"></div>
+		// 	<div class="quartile" style="background-color:#4589CD"></div>
+		// 	<div class="quartile" style="background-color:#31D874"></div>
+		// 	<div class="quartile" style="background-color:#4EDC45"></div>
+		// 	<div class="quartile" style="background-color:#CBD61F"></div>
+		// 	<div class="quartile" style="background-color:#D9C31C"></div>
+		// 	<div class="quartile" style="background-color:#DE9E17"></div>
+		// 	<div class="quartile" style="background-color:#EA6632"></div>
+		// 	<div class="quartile" style="background-color:#E45E6B"></div>
+		// 	<div class="quartile" style="background-color:#A66457"></div>
+		// 	<div class="quartile" style="background-color:#857354"></div>
+		// 	<div class="quartile" style="background-color:#988384"></div>
+		// 	<div class="quartile" style="background-color:#D8D5D3"></div>
+		// 	<div class="quartile" style="background-color:#F2F5F0"></div>
+		// 	</div>
 
-	
+
+// Using color legends data from http://astrogeology.usgs.gov/search/map/Mars/GlobalSurveyor/MOLA/Mars_MGS_MOLA_ClrShade_merge_global_463m
+
+		function getColor(d) {
+    		return d >= 21000 ? 'rgb(181,251,254)' :
+				d >= 20000 ? 'rgb(218,253,255)' :
+           d >= 19000  ? 'rgb(255,255,255)' :
+           d >= 18000  ? 'rgb(252,249,249)' :
+           d >= 17000  ? 'rgb(249,244,243)' :
+			  d >= 16000 ? 'rgb(248,241,239)' :
+			  d >= 15000 ? 'rgb(246,238,236)' :
+			  d >= 14000 ? 'rgb(238,223,218)' :
+			  d >= 13000 ? 'rgb(229,208,201)' :
+			 d >= 12000  ? 'rgb(221,193,185)' :
+			 d >= 11000  ? 'rgb(211,179,170)' :
+			 d >= 9000  ? 'rgb(194,153,141)' :
+			 d >= 8000 ? 'rgb(186,141,128)' :
+			 d >= 7000 ? 'rgb(177,130,116)' :
+			 d >= 6000 ? 'rgb(168,119,105)' :
+			 d >= 5000  ? 'rgb(190,107,91)' :
+			d >= 3000 ? 'rgb(226,111,69)' :
+			d >= 2000 ? 'rgb(240,147,67)' :
+			d >= 1000 ? 'rgb(254,188,63)' :
+			d >= 0  ? 'rgb(243,254,38)' :
+			d >= -1000 ? 'rgb(148,239,38)' :
+			d >= -2000 ? 'rgb(66,225,38)' :
+			d >= -3000 ? 'rgb(38,230,170)' :
+			d >= -4000  ? 'rgb(38,134,235)' :
+		  d >= -5000 ? 'rgb(38,62,223)' :
+		  d >= -6000 ? 'rgb(76,38,211)' :
+		  d >= -7000 ? 'rgb(130,38,199)' :
+		  d >= -8000 ? 'rgb(129,38,152)' :
+                   'rgb(104,38,103)';
+						}
+
+		var legend = L.control({position: 'bottomright'});
+
+		legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [-9000, -8000, -7000, -6000, -5000, -4000, -3000, -2000, -1000, 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000 ,14000,15000, 16000, 18000, 19000, 20000, 21000],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i]) + '"></i> ' +
+            grades[i] + (grades[i + 1]+1 ? ' &ndash; ' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(map);
+
+
+
 
 	</script>
+
+	<style>
+	.legend {
+    line-height: 18px;
+    color: #555;
+	}
+	.legend i {
+    width: 18px;
+    height: 15px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+	}
+	</style>
 </body>
 </html>
