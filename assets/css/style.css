@@ -1,0 +1,24 @@
+.intro {
+   position:absolute;
+   bottom:1em;
+   margin-left:4em;
+}
+#collapseIntro {
+   position:absolute;
+   bottom:4em;
+   margin-left:4em;
+}
+.overlay {
+    /*position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;*/
+}
+
+.overlay .btn {
+    pointer-events: initial;
+}
+
+.sharpbtn {
+  border-radius:0;
+}
