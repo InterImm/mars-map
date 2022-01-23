@@ -64,9 +64,31 @@ var baseMaps = {
 
 var marsCities = new L.LayerGroup().addTo(map);
 
+// 火星南河城(Procyon City)：2123 年成立；伊希地城市圈
+// 火星天狼城(Betelgeuse City)：2123 年成立；伊希地城市圈
+// 火星参宿城(Sirius City)：2123 年成立；伊希地城市圈
+// 火星视界城(Horizon City)：2148 年成立；子午线城市圈；城内的视界星港是火星最大的星港
+// 火星楼兰城(Kroran City)：2250 年成立；亚马逊城市圈
+// 火星亚特兰帝斯城(Atlantis City)：2250 年成立；亚马逊城市圈
+// 火星庞贝城(Pompeii City)：2250 年成立；亚马逊城市圈
+// 火星端点城(Terminus City)：2156 年成立；希腊城市圈；农业为主的城市
+// 火星川陀城(Trantor City)：2155 年成立；希腊城市圈；矿业和资源产业
+// 火星星坠城(Bolide City)：2165 年成立；子午线城市圈；围绕行星地质大学（Planetary Geology University）建成。
+// 火星奇点城(Singularity City)：2145 年成立；子午线城市圈；安逸的生活环境
+
+
 marsCitiesPopup = {
     Procyon: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>南河城（Procyon）</a></h4>2123 年成立；伊希地城市圈</div>",
-    Sirius: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>参宿城（Sirius）</a></h4>2123 年成立；伊希地城市圈</div>"
+    Betelgeuse: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>参宿城（Betelgeuse）</a></h4>2123 年成立；伊希地城市圈</div>",
+    Sirius: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>天狼城（Sirius）</a></h4>2123 年成立；伊希地城市圈</div>",
+    Kroran: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>楼兰城（Kroran）</a></h4>2250 年成立；亚马逊城市圈</div>",
+    Pompeii: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>庞贝城（Pompeii）</a></h4>2250 年成立；亚马逊城市圈</div>",
+    Atlantis: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>亚特兰蒂斯城（Atlantis）</a></h4>2250 年成立；亚马逊城市圈</div>",
+    Sigularity: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>奇点城（Sigularity）</a></h4>2145 年成立；子午线城市圈；安逸的生活环境</div>",
+    Horizon: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>视界城（Horizon）</a></h4>2148 年成立；子午线城市圈；城内的视界星港是火星最大的星港</div>",
+    Bolide: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>星坠城（Bolide）</a></h4>2165 年成立；子午线城市圈；围绕行星地质大学（Planetary Geology University）建成</div>",
+    Terminus: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>端点城（Terminus）</a></h4>2156 年成立；希腊城市圈；农业为主的城市</div>",
+    Trantor: "<div class='leaflet-popup-content-card'><h4><a href='http://book.interimm.org/history/mars_immigration/'>川陀城（Trantor）</a></h4>2155 年成立；希腊城市圈；矿业和资源产业</div>",
 }
 
 L.marker([16.181, 84.624], {
@@ -81,64 +103,64 @@ L.marker([16.181, 84.624], {
     }).bindLabel('<b>参宿城</b>', {
         noHide: true,
         offset: [23, -35]
-    }).bindPopup(marsCitiesPopup['Sirius']).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Betelgeuse']).addTo(marsCities),
     L.marker([7.439, 86.578], {
         icon: cityMarker,
     }).bindLabel('<b>天狼城</b>', {
         noHide: true,
         direction: 'left',
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Sirius']).addTo(marsCities),
     L.marker([6.0, 176.0], {
         icon: cityMarker,
     }).bindLabel('<b>楼兰城</b>', {
         noHide: true,
         direction: 'left',
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Kroran']).addTo(marsCities),
     L.marker([15.893, 199.833], {
         icon: cityMarker,
     }).bindLabel('<b>庞贝城</b>', {
         noHide: true,
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Pompeii']).addTo(marsCities),
     L.marker([15.799, 351.137], {
         icon: cityMarker,
     }).bindLabel('<b>奇点城</b>', {
         noHide: true,
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Sigularity']).addTo(marsCities),
     L.marker([5.496, 190.603], {
         icon: cityMarker,
     }).bindLabel('<b>亚特兰蒂斯城</b>', {
         noHide: true,
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Atlantis']).addTo(marsCities),
     L.marker([5.029, 10.541], {
         icon: cityMarker,
     }).bindLabel('<b>视界城</b>', {
         noHide: true,
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Horizon']).addTo(marsCities),
     L.marker([28.850, 309.830], {
         icon: cityMarker,
     }).bindLabel('<b>星坠城</b>', {
         noHide: true,
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Bolide']).addTo(marsCities),
     L.marker([-38.142, 86.896], {
         icon: cityMarker,
     }).bindLabel('<b>端点城</b>', {
         noHide: true,
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Terminus']).addTo(marsCities),
     L.marker([-39.939, 67.842], {
         icon: cityMarker,
     }).bindLabel('<b>川陀城</b>', {
         noHide: true,
         direction: 'left',
         offset: [23, -35]
-    }).addTo(marsCities),
+    }).bindPopup(marsCitiesPopup['Trantor']).addTo(marsCities),
 
     // https://amazonia-gov.github.io/
 
