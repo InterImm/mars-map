@@ -1,103 +1,67 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="zh-CN">
 <head>
-	<title>火星地图 | 星际移民中心</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/css/leaflet.css"/>
-	<link rel="stylesheet" href="assets/css/leaflet.label.css"/>
-	<!-- <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"> -->
-	<link rel="stylesheet" href="assets/fontawesome-5/css/all.css">
-	<!-- <link rel="stylesheet" href="assets/css/leaflet.extra-markers.min.css"> -->
-	<link rel="stylesheet" href="assets/leaflet-extramarker/leaflet.extra-markers.min.css">
-
-
-
-  	<script src="assets/js/leaflet.js"></script>
-  	<script src="assets/js/leaflet.label.js"></script>
-	<script src="assets/leaflet-extramarker/leaflet.extra-markers.min.js"></script>
-
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-
-	<link rel="stylesheet" href="assets/css/style.css"/>
-
-
-	<!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-
-
-    <!--  Bootstrap Translation Plugins -->
-	<script src="assets/js/bootstrap-transition.js"></script>
-
-
-	<!--  Bootstrap Collapse Plugins -->
-	<script src="assets/js/bootstrap-collapse.js"></script>
-
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  ICONS -->
-      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-      <link rel="apple-touch-icon" sizes="57x57" href="./favicons/apple-touch-icon-57x57.png">
-      <link rel="apple-touch-icon" sizes="114x114" href="./favicons/apple-touch-icon-114x114.png">
-      <link rel="apple-touch-icon" sizes="72x72" href="./favicons/apple-touch-icon-72x72.png">
-      <link rel="apple-touch-icon" sizes="144x144" href="./favicons/apple-touch-icon-144x144.png">
-      <link rel="apple-touch-icon" sizes="60x60" href="./favicons/apple-touch-icon-60x60.png">
-      <link rel="apple-touch-icon" sizes="120x120" href="./favicons/apple-touch-icon-120x120.png">
-      <link rel="apple-touch-icon" sizes="76x76" href="./favicons/apple-touch-icon-76x76.png">
-      <link rel="apple-touch-icon" sizes="152x152" href="./favicons/apple-touch-icon-152x152.png">
-      <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon-180x180.png">
-      <link rel="icon" type="image/png" href="./favicons/favicon-192x192.png" sizes="192x192">
-      <link rel="icon" type="image/png" href="./favicons/favicon-160x160.png" sizes="160x160">
-      <link rel="icon" type="image/png" href="./favicons/favicon-96x96.png" sizes="96x96">
-      <link rel="icon" type="image/png" href="./favicons/favicon-16x16.png" sizes="16x16">
-      <link rel="icon" type="image/png" href="./favicons/favicon-32x32.png" sizes="32x32">
-      <meta name="msapplication-TileColor" content="#da532c">
-      <meta name="msapplication-TileImage" content="./favicons/mstile-144x144.png">
-
-
+<meta charset="utf-8">
+<script>document.documentElement.classList.add("js")</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>火星地图 | 星际移民中心</title>
+<meta name="description" content="星际移民中心的 2200 年火星城市地图：火星城市、阿玛宗共和国和历史着陆遗址，叠加在 MOLA 海拔图上。">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" href="favicons/favicon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="favicons/apple-touch-icon-180x180.png">
+<link rel="alternate" hreflang="zh-CN" href="https://interimm.org/mars-map/">
+<link rel="alternate" hreflang="en" href="https://interimm.org/mars-map/en/">
+<!-- Shared InterImm look (colours, fonts, header, footer), served by interimm.org. See
+     https://github.com/InterImm/interimm.github.io/blob/hugo/kit/README.md -->
+<link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1.9.4">
+<link rel="stylesheet" href="css/map.css?v=20261003">
+<script src="https://interimm.org/kit/interimm.js" defer></script>
+<script src="vendor/leaflet/leaflet.js?v=1.9.4" defer></script>
+<script src="js/map.js?v=20261003" defer></script>
 </head>
-<style>
-html, body, #map {
-width:100%; height:100%; padding:0px; margin:0px;
-}
-</style>
 <body>
-	<div id="map">
+<a class="skip-link" href="#main">跳到正文</a>
 
-	</div>
-
-
-	<div class="intro overlay btn-group-vertical" role="group">
-
-<button class="overlay btn sharpbtn" type="button" data-toggle="collapse" data-target="#collapseIntro" aria-expanded="false" aria-controls="collapseIntro" style="background:black;color:white;">
-  关于 / About
-</button>
-
-</div>
-<div class="intro collapse" id="collapseIntro" style="max-width:300px;">
-  <div class="well">
-	<a href="http://interimm.org">星际移民中心</a>提供的 2200 年火星城市地图。关于城市发展，请参阅 <a href="http://book.interimm.org/history/mars_immigration.html#marscities">《星际移民之书》中的火星移民历史一章</a>。
-	<hr>
-	Switch to <a href="en">English</a>
+<!-- Header: replaced with the live interimm.org menu by the kit script; this markup is the fallback. -->
+<header class="site-header" data-interimm-header data-lang="cn" data-current="mars-map" data-no-signal data-lang-en="https://interimm.org/mars-map/en/">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://interimm.org/">
+      <img class="brand-mark" src="favicons/favicon-96x96.png" alt="" width="32" height="32">
+      <span class="brand-name">星际移民中心</span>
+    </a>
   </div>
-</div>
+</header>
 
-<script src="assets/js/the-map.js"></script>
+<main id="main" class="map-stage">
+  <div id="map" role="region" aria-label="2200 年的火星"><noscript><p class="wrap">地图需要 JavaScript。</p></noscript></div>
 
-	<style>
-	.legend {
-    line-height: 12px;
-    color: #555;
-	 padding: 2px 2px 2px 2px;
-	 font-size: 70%;
-	}
-	.legend i {
-    width: 12px;
-    height: 10px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-	}
-	</style>
+  <section class="map-panel map-title">
+    <p class="kicker">星际移民中心 · 火星地图</p>
+    <h1>2200 年的火星</h1>
+    <p class="lede">火星上的城市、阿玛宗共和国，以及人类最早的着陆点。点一下地名查看档案。</p>
+    <details>
+      <summary>关于这张地图</summary>
+      <p>这是<a href="https://interimm.org/">星际移民中心</a>绘制的 2200 年火星城市地图。关于城市发展，请参阅<a href="https://book.interimm.org/history/mars_immigration/">《星际移民之书》中的火星移民历史一章</a>。</p>
+      <p class="fine">底图为 NASA MOLA 海拔着色图，来自 <a href="https://github.com/nmanaud/whereonmars/wiki/Basemaps">whereonmars</a>。着陆遗址是真实的；城市属于星际移民中心的世界设定。</p>
+    </details>
+  </section>
+
+  <details class="map-panel map-key" id="key">
+    <summary>图例</summary>
+    <div class="key-layers"></div>
+    <div class="key-elev">
+      <p class="key-elev-title"></p>
+      <div class="key-bar"></div>
+      <div class="key-ticks"></div>
+    </div>
+  </details>
+</main>
+
+<!-- Footer: replaced with the live interimm.org footer by the kit script; this markup is the fallback. -->
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p>星际移民中心 · <a href="https://github.com/InterImm/mars-map">源代码</a></p></div>
+</footer>
 </body>
 </html>

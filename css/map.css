@@ -1,0 +1,96 @@
+/* Mars Map styles. Colours, fonts, header and footer come from the shared InterImm kit
+   (https://interimm.org/kit/interimm.css); this file only places the map and dresses
+   Leaflet's parts in the kit's paper and ink. */
+
+.map-stage { position: relative; flex: none; height: max(30rem, calc(100dvh - var(--hh, 4.75rem))); background: var(--bg-alt); }
+#map { position: absolute; inset: 0; background: var(--bg-alt); font: inherit; }
+
+/* Paper panels over the map: solid surface, thin rule, small radius. */
+.map-panel {
+  position: absolute; z-index: 1000;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+
+/* Title card */
+.map-title { top: 0.75rem; left: 0.75rem; width: min(22rem, calc(100% - 5rem)); padding: 0.9rem 1.1rem 0.8rem; }
+.map-title .kicker { margin: 0 0 0.35rem; }
+.map-title h1 { margin: 0; font-size: 1.6rem; font-weight: 500; }
+.map-title .lede { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+.map-title details { margin-top: 0.6rem; border-top: 1px solid var(--border); padding-top: 0.5rem; font-size: 0.9rem; line-height: 1.55; }
+.map-title summary { cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.map-title summary:hover { color: var(--text); }
+.map-title details p { margin: 0.5rem 0 0; }
+.map-title details .fine { color: var(--muted); font-size: 0.8rem; }
+
+/* Key: layer switches and the elevation scale */
+.map-key { right: 0.75rem; bottom: 1.75rem; width: 15.5rem; padding: 0.55rem 0.9rem 0.7rem; }
+.map-key summary { cursor: pointer; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.map-key summary:hover { color: var(--text); }
+.key-layers { margin: 0.4rem 0 0.2rem; }
+.key-row { display: flex; align-items: center; gap: 0.55rem; padding: 0.2rem 0; font-size: 0.9rem; cursor: pointer; }
+.key-row input { margin: 0; accent-color: var(--accent); }
+.key-row .pin { position: relative; width: 18px; height: 18px; flex: none; }
+.key-elev { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+.key-elev-title { margin: 0 0 0.35rem; font-size: 0.8rem; color: var(--muted); }
+.key-bar { height: 0.6rem; border-radius: 1px; border: 1px solid var(--border); }
+.key-ticks { position: relative; height: 1.1rem; margin: 0 0.6rem 0 0.3rem; font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.key-ticks span { position: absolute; top: 0.15rem; transform: translateX(-50%); }
+
+/* Tiles overlap by half a pixel so no hairline seams show between them on high-density screens. */
+.leaflet-container img.leaflet-tile { width: 256.5px !important; height: 256.5px !important; }
+
+/* Pins: the one accent colour for cities, ink for everything else. */
+.pin span { position: absolute; inset: 3px; display: block; box-sizing: border-box; }
+.pin-city span { border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--accent); }
+.pin-state span { inset: 4px; transform: rotate(45deg); background: var(--surface); border: 2px solid var(--text); }
+.pin-site span { inset: 4px; border-radius: 50%; background: var(--surface); border: 2px solid var(--text); }
+.leaflet-marker-icon.pin:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 50%; }
+
+/* Permanent place names */
+.leaflet-tooltip.place-label {
+  padding: 0.05rem 0.4rem; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); box-shadow: none;
+  font-family: var(--font); font-size: 0.78rem; font-weight: 500; line-height: 1.5;
+}
+.leaflet-tooltip.place-label-site { color: var(--muted); font-weight: 400; font-size: 0.72rem; }
+.leaflet-tooltip.place-label::before { display: none; }
+
+/* Popups as small record cards */
+.place-popup .leaflet-popup-content-wrapper {
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.place-popup .leaflet-popup-tip { background: var(--surface); border: 1px solid var(--border); box-shadow: none; }
+.place-popup .leaflet-popup-content { margin: 0.85rem 1rem 0.8rem; font-size: 0.9rem; line-height: 1.55; }
+.place-popup .leaflet-popup-content p { margin: 0.35rem 0 0; }
+.place-popup .leaflet-popup-content .kicker { margin: 0 0 0.3rem; }
+.place-popup h3 { margin: 0; font-size: 1.25rem; font-weight: 500; }
+.place-popup h3 small { margin-left: 0.3rem; font-family: var(--font); font-size: 0.8rem; color: var(--muted); }
+.place-popup .meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+.place-popup .links { display: flex; flex-direction: column; gap: 0.15rem; margin-top: 0.55rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+.place-popup a.leaflet-popup-close-button { color: var(--muted); top: 0.3rem; right: 0.3rem; }
+.place-popup a.leaflet-popup-close-button:hover { color: var(--text); }
+
+/* Leaflet's own controls in kit dress */
+.leaflet-container { font-family: var(--font); }
+.leaflet-container a { color: var(--link); }
+.leaflet-bar { border: 1px solid var(--border) !important; border-radius: var(--radius); box-shadow: var(--shadow) !important; }
+.leaflet-bar a, .leaflet-bar a:hover { background: var(--surface); color: var(--text); border-bottom-color: var(--border); font-family: var(--font); font-weight: 400; }
+.leaflet-bar a:hover { background: var(--text); color: var(--bg); }
+.leaflet-bar a:first-child { border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); }
+.leaflet-bar a:last-child { border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); }
+.leaflet-touch .leaflet-bar a { width: 2.25rem; height: 2.25rem; line-height: 2.25rem; }
+.leaflet-top.leaflet-right .leaflet-control { margin: 0.75rem 0.75rem 0 0; }
+.leaflet-control-attribution.leaflet-control { background: color-mix(in srgb, var(--surface) 85%, transparent); color: var(--muted); font-size: 0.7rem; padding: 0.05rem 0.45rem; }
+.leaflet-control-attribution a { color: var(--muted); }
+
+/* Phones: compact title, key folds to a single line above the credits. */
+@media (max-width: 760px) {
+  .map-title { top: 0.5rem; left: 0.5rem; width: calc(100% - 4rem); padding: 0.6rem 0.8rem 0.55rem; }
+  .map-title h1 { font-size: 1.25rem; }
+  .map-title .lede { display: none; }
+  .map-title details { margin-top: 0.4rem; padding-top: 0.35rem; }
+  .map-key { right: 0.5rem; left: auto; bottom: 1.6rem; width: min(15.5rem, calc(100% - 1rem)); }
+  .leaflet-top.leaflet-right .leaflet-control { margin: 0.5rem 0.5rem 0 0; }
+}
